@@ -18,7 +18,18 @@ httpAPI.prototype.get = function(url, callback) {
 }
 
 // POST requests
+httpAPI.prototype.post = function(url, data, callback) {
+  this.http.open('POST', url, true);
+  this.http.setRequestHeader('Content-type', 'application/json');
+  this.http.onload = function(){
+    callback(null, this.http.responseText);
+  }.bind(this);
+
+
+  this.http.send(JSON.stringify(data));
+}
 
 // PUT requests
+
 
 // DELETE requests
