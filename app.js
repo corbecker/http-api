@@ -1,6 +1,6 @@
 const http = new httpAPI();
 
-// get posts
+// GET posts
 // http.get('http://jsonplaceholder.typicode.com/posts', function(error, posts){
 //   if(error){
 //     console.log(error);
@@ -13,7 +13,7 @@ const data = {
   body: "This is a custom post."
 };
 
-// create post
+// CREATE post
 // http.post('http://jsonplaceholder.typicode.com/posts', data, function(error, post){
 //   if(error){
 //     console.log(error);
@@ -22,11 +22,20 @@ const data = {
 //   }
 // });
 
-// update post
-http.put('http://jsonplaceholder.typicode.com/posts/1', data, function(error, post) {
+// UPDATE post
+// http.put('http://jsonplaceholder.typicode.com/posts/1', data, function(error, post) {
+//   if(error){
+//     console.log(error);
+//   }else{
+//     console.log(post);
+//   }
+// });
+
+// DELETE a post
+http.delete('http://jsonplaceholder.typicode.com/posts/1', function(error, response){
   if(error){
     console.log(error);
   }else{
-    console.log(post);
+    console.log(response);
   }
-});
+})

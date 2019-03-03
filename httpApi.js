@@ -40,3 +40,14 @@ httpAPI.prototype.put = function(url, data, callback) {
 }
 
 // DELETE requests
+httpAPI.prototype.delete = function(url, callback) {
+  this.http.open('DELETE', url, true);
+  this.http.onload = function() {
+    if(this.http.status === 200){
+      callback(null, 'Post successfully deleted.');
+    }else {
+      callback('Error: ' + this.http.status);
+    }
+  }.bind(this);
+  this.http.send();
+}
