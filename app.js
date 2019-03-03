@@ -9,11 +9,21 @@ const http = new httpAPI();
 //   }
 // });
 const data = {
-  "title": "Custom title",
-  "body": "This is a custom post."
+  title: "Custom title changed",
+  body: "This is a custom post."
 };
 
-http.post('http://jsonplaceholder.typicode.com/posts', data, function(error, post){
+// create post
+// http.post('http://jsonplaceholder.typicode.com/posts', data, function(error, post){
+//   if(error){
+//     console.log(error);
+//   }else{
+//     console.log(post);
+//   }
+// });
+
+// update post
+http.put('http://jsonplaceholder.typicode.com/posts/1', data, function(error, post) {
   if(error){
     console.log(error);
   }else{

@@ -30,6 +30,13 @@ httpAPI.prototype.post = function(url, data, callback) {
 }
 
 // PUT requests
-
+httpAPI.prototype.put = function(url, data, callback) {
+  this.http.open('PUT', url, true);
+  this.http.setRequestHeader('Content-type', 'application/json');
+  this.http.onload = function() {
+    callback(null, this.http.responseText);
+  }.bind(this);
+  this.http.send(JSON.stringify(data));
+}
 
 // DELETE requests
