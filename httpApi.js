@@ -1,53 +1,52 @@
 // Using http://jsonplaceholder.typicode.com to test 
-function httpAPI() {
-  this.http = new XMLHttpRequest();
-}
+class HttpAPI {
+  get(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(res => res.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    })
+  }
 
-// GET requests
-httpAPI.prototype.get = function(url, callback) {
-  this.http.open('GET', url, true);
-  this.http.send();
+  post(url, data){
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'applcation/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(res => res.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    })
+  }
 
-  this.http.onload = function() {
-    if(this.http.status === 200){
-      callback(null, this.http.responseText);
-    }else{
-      callback('Error: ' + this.http.status);
-    }
-  }.bind(this);
-}
+  put(url, data){
+    return new Promise ((resolve, reject) => {
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+    });
+  }
 
-// POST requests
-httpAPI.prototype.post = function(url, data, callback) {
-  this.http.open('POST', url, true);
-  this.http.setRequestHeader('Content-type', 'application/json');
-  this.http.onload = function(){
-    callback(null, this.http.responseText);
-  }.bind(this);
-
-
-  this.http.send(JSON.stringify(data));
-}
-
-// PUT requests
-httpAPI.prototype.put = function(url, data, callback) {
-  this.http.open('PUT', url, true);
-  this.http.setRequestHeader('Content-type', 'application/json');
-  this.http.onload = function() {
-    callback(null, this.http.responseText);
-  }.bind(this);
-  this.http.send(JSON.stringify(data));
-}
-
-// DELETE requests
-httpAPI.prototype.delete = function(url, callback) {
-  this.http.open('DELETE', url, true);
-  this.http.onload = function() {
-    if(this.http.status === 200){
-      callback(null, 'Post successfully deleted.');
-    }else {
-      callback('Error: ' + this.http.status);
-    }
-  }.bind(this);
-  this.http.send();
+  delete(url){
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'DELETE'
+      })
+      .then(res => res.json())
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+    })
+  }
 }

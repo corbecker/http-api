@@ -1,41 +1,26 @@
-const http = new httpAPI();
+const http = new HttpAPI();
 
 // GET posts
-// http.get('http://jsonplaceholder.typicode.com/posts', function(error, posts){
-//   if(error){
-//     console.log(error);
-//   }else{
-//     console.log(posts);
-//   }
-// });
+const posts = http.get('http://jsonplaceholder.typicode.com/posts')
+  .then(data => console.log(data))
+  .catch(error => console.log(error))
+
 const data = {
   title: "Custom title changed",
-  body: "This is a custom post."
+  body: "This is a custom post that has been changed."
 };
 
-// CREATE post
-// http.post('http://jsonplaceholder.typicode.com/posts', data, function(error, post){
-//   if(error){
-//     console.log(error);
-//   }else{
-//     console.log(post);
-//   }
-// });
+// Create post
+http.post('http://jsonplaceholder.typicode.com/posts', data)
+  .then(data => console.log(data))
+  .catch(error => console.log(error));
 
-// UPDATE post
-// http.put('http://jsonplaceholder.typicode.com/posts/1', data, function(error, post) {
-//   if(error){
-//     console.log(error);
-//   }else{
-//     console.log(post);
-//   }
-// });
+// Update post
+http.put('http://jsonplaceholder.typicode.com/posts/1', data)
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
 
-// DELETE a post
-http.delete('http://jsonplaceholder.typicode.com/posts/1', function(error, response){
-  if(error){
-    console.log(error);
-  }else{
-    console.log(response);
-  }
-})
+// Delete post
+http.delete('http://jsonplaceholder.typicode.com/posts/2')
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
